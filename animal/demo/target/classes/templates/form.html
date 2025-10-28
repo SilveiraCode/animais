@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Animal</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 0; color: #333; }
+        .container { max-width: 500px; margin: 60px auto; background: #fff; border-radius: 10px; padding: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #4A4EF5; margin-bottom: 25px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; }
+        .btn { background: #4A4EF5; color: white; padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; }
+        .btn:hover { background: #373bf0; }
+        .back { display: inline-block; text-decoration: none; color: #555; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Cadastrar Animal</h1>
+
+    <form th:action="@{/animals}" method="post" th:object="${animal}">
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required>
+
+        <label>Espécie:</label>
+        <input type="text" th:field="*{especie}" required>
+
+        <label>Idade:</label>
+        <input type="number" th:field="*{idade}" required>
+
+        <button type="submit" class="btn">Salvar</button>
+    </form>
+
+    <a th:href="@{/animals}" class="back">Voltar</a>
+</div>
+</body>
+</html>

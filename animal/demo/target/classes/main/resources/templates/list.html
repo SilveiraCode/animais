@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Animais</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 0; color: #333; }
+        .container { max-width: 900px; margin: 50px auto; background: #fff; border-radius: 10px; padding: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #4A4EF5; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background: #f0f2ff; color: #333; }
+        tr:hover { background: #f9f9ff; }
+        .actions a { text-decoration: none; padding: 6px 12px; border-radius: 6px; font-size: 14px; margin: 0 3px; }
+        .view { background: #4A4EF5; color: #fff; }
+        .edit { background: #F59E0B; color: #fff; }
+        .delete { background: #EF4444; color: #fff; }
+        .new-btn { display: inline-block; text-decoration: none; background: #22C55E; color: white; padding: 10px 18px; border-radius: 8px; margin-bottom: 15px; }
+        .new-btn:hover, .actions a:hover { opacity: 0.85; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Animais</h1>
+
+    <a th:href="@{/animals/new}" class="new-btn">+ Novo Animal</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Espécie</th>
+            <th>Idade</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="animal : ${animals}">
+            <td th:text="${animal.id}"></td>
+            <td th:text="${animal.nome}"></td>
+            <td th:text="${animal.especie}"></td>
+            <td th:text="${animal.idade}"></td>
+            <td class="actions">
+                <a th:href="@{/animals/view/{id}(id=${animal.id})}" class="view">Ver</a>
+                <a th:href="@{/animals/edit/{id}(id=${animal.id})}" class="edit">Editar</a>
+                <a th:href="@{/animals/delete/{id}(id=${animal.id})}" class="delete" onclick="return confirm('Confirma exclusão?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
