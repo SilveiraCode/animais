@@ -2,29 +2,63 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalhes do Animal</title>
+    <title>Editar Animal</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 0; color: #333; }
-        .container { max-width: 500px; margin: 60px auto; background: #fff; border-radius: 10px; padding: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #4A4EF5; margin-bottom: 25px; }
-        p { font-size: 16px; margin-bottom: 10px; }
-        strong { color: #111; }
-        .btn { display: inline-block; text-decoration: none; background: #4A4EF5; color: white; padding: 10px 15px; border-radius: 6px; }
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; color: #333; }
+        header {
+          background: #4A4EF5;
+          color: white;
+          text-align: center;
+          padding: 20px;
+          font-size: 22px;
+          font-weight: bold;
+        }
+        .container {
+          max-width: 500px;
+          margin: 40px auto;
+          background: #fff;
+          border-radius: 10px;
+          padding: 25px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; color: #4A4EF5; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; }
+        input {
+          width: 100%; padding: 10px; margin-bottom: 15px;
+          border: 1px solid #ccc; border-radius: 6px;
+        }
+        .btn {
+          background: #4A4EF5; color: white; padding: 10px 15px;
+          border: none; border-radius: 6px; cursor: pointer; width: 100%;
+        }
         .btn:hover { background: #373bf0; }
-        .back { display: inline-block; text-decoration: none; color: #555; margin-top: 10px; }
+        .back {
+          display: block; text-align: center; margin-top: 10px;
+          color: #555; text-decoration: none;
+        }
+        @media (max-width: 600px) {
+          .container { margin: 20px; padding: 15px; }
+          header { font-size: 18px; padding: 15px; }
+        }
     </style>
 </head>
 <body>
+<header>🐾 Sistema de Cadastro de Animais</header>
 <div class="container">
-    <h1>Detalhes do Animal</h1>
+    <h1>Editar Animal</h1>
+    <form th:action="@{/animals/edit/{id}(id=${animal.id})}" method="post" th:object="${animal}">
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required>
 
-    <p><strong>ID:</strong> <span th:text="${animal.id}"></span></p>
-    <p><strong>Nome:</strong> <span th:text="${animal.nome}"></span></p>
-    <p><strong>Espécie:</strong> <span th:text="${animal.especie}"></span></p>
-    <p><strong>Idade:</strong> <span th:text="${animal.idade}"></span></p>
+        <label>Espécie:</label>
+        <input type="text" th:field="*{especie}" required>
 
+        <label>Idade:</label>
+        <input type="number" th:field="*{idade}" required>
+
+        <button type="submit" class="btn">Salvar Alterações</button>
+    </form>
     <a th:href="@{/animals}" class="back">Voltar</a>
-    <a th:href="@{/animals/edit/{id}(id=${animal.id})}" class="btn">Editar</a>
 </div>
 </body>
 </html>
