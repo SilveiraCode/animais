@@ -37,11 +37,11 @@ public class AnimalController {
     }
 
     // Salvar novo animal
-    @PostMapping
+   @PostMapping("/salvar")
     public String save(@ModelAttribute Animal animal) {
         animalService.salvar(animal);
         return "redirect:/animals";
-    }
+    }
 
     // Formulário de edição
     @GetMapping("/edit/{id}")
@@ -78,3 +78,4 @@ public class AnimalController {
         return "redirect:/animals";
     }
 }
+
